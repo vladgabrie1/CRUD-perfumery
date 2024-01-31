@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Note Details</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+  <script defer src="../../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
+</head>
+<body th:object="${note}">
+<!--Nav bar-->
+<div th:insert="~{/fragments/navbar::nav}" class="fixed-top"></div>
+
+
+<div class="container m-5 mx-auto">
+  <div class="row">
+    <!-- Left column for note image -->
+    <div class="col-md-6">
+      <div class="container d-sm-flex justify-content-sm-center">
+        <img class="details-perfume-img img-fluid" th:src="@{'/img/notes/' + *{getName().toLowerCase()} + '.jpg'}" alt="note-photo">
+      </div>
+    </div>
+
+    <!-- Right column for details table -->
+    <div class="col-md-6 my-5 d-flex flex-column align-items-center justify-content-around">
+      <table class="table">
+        <tbody class="h3">
+        <tr>
+          <td>Name: </td>
+          <td th:text="*{getName()}">name</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="my-3" th:text="*{getDescription()}">description</td>
+        </tr>
+        <tr>
+          <td>Group: </td>
+          <td th:text="*{getGroup()}">release date</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container px-0 mt-4">
+  <h3 class="text-center">Perfume Notes</h3>
+  <div class="row row-cols-2 notes-container rounded-4 m-auto row-cols-md-6 row-cols-lg-8">
+
+    <div class="col my-4" th:each="perfume : ${note.getPerfumes()}">
+      <div th:attr="perfume-id=${perfume.id}" class="text-center d-flex flex-column align-items-center details-btn-js justify-content-around">
+        <img th:src="@{'/img/perfumes-img/' + ${perfume.getName().toLowerCase()} + '.jpg'}" alt="perfume" class="img-fluid square-img rounded-4">
+        <p th:text="${perfume.getName()}" class="mt-2 h5">Name</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div th:insert="~{/fragments/footer::footer}"></div>
+</body>

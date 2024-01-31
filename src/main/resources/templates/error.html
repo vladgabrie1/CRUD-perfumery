@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 3rem;
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+
+        .card-text {
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+    </style>
+    <title>Error</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <span class="emoji">🏰</span>
+        <h1 class="card-title">Oops! Error - An unexpected issue occurred</h1>
+        <p class="card-text">Please try again later.</p>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

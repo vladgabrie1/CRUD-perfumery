@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <script defer src="../../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
+</head>
+<body class="body">
+<!--Nav bar-->
+<div th:insert="~{fragments/navbar::nav}" class="fixed-top"></div>
+
+<header id="headerNotes" class="header container">
+    <div class="container">
+        <div class="row">
+            <div id="container-text" class="col-md-12 text-center">
+                <h1 id="brand-name" class="display-1">Notes</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--cards-->
+<main class="w-auto m-5 container-fluid">
+    <div th:insert="~{fragments/note-filter::filter}"></div>
+
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
+        <div class="col" th:each="note : ${notes}" id="perfumeContainer">
+            <div class="card h-80 m-3">
+                <img th:src="@{'/img/notes/' + ${note.getName().toLowerCase()} + '.jpg'}" class="card-img-top card-img-fixed" alt="...">
+
+                <div class="card-body">
+                    <div class="clearfix mb-3">
+                        <span th:text="${note.getName()}" class="float-start badge">Note Name</span>
+                    </div>
+                    <div class="row card-buttons-container">
+                        <!-- Details Button-->
+                        <div id="details" th:attr="note-id=${note.id}" class="details-btn details-btn-js text-center col">
+                            <a class="btn">Details</a>
+                        </div>
+
+                        <div class="delete-btn text-center col">
+                            <form th:id="'deleteForm-' + ${note.id}" th:action="@{/note/delete}" method="post">
+                                <input type="hidden" th:name="entityId" th:value="${note.id}"/>
+                                <button type="button" th:attr="data-entity-id=${note.id}" class="btn delete-button">Delete</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:insert="~{fragments/footer::footer}"></div>
+</body>

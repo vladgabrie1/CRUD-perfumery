@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Note</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+  <script defer src="../../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
+
+</head>
+<body class="body">
+<!--Navbar-->
+<div th:insert="~{fragments/navbar::nav}"  class="fixed-top"></div>
+
+<!--Form to create note-->
+<div class="d-flex justify-content-center align-items-start container">
+  <div class="card py-5 mb-3 px-3">
+    <h5 th:utext="#{addNote.title}" class="mx-5">Add Note</h5>
+    <span th:utext="#{addNote.subtitle}" class="mobile-text mb-3 mx-5 ">Fill in the details below to add a new note</span>
+
+    <div class="container form-container m-auto py-5">
+    <form method="post" enctype="multipart/form-data" th:object="${noteViewModel}">
+      <!-- Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label text-dark medium">Name:</label>
+        <div class="d-flex flex-column">
+          <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger">
+            <p th:errors="*{name}"></p>
+          </div>
+          <input type="text" class="form-control rounded-5" placeholder="Name" id="name" name="name" th:field="*{name}" required>
+        </div>
+      </div>
+
+      <!-- Note Group -->
+      <div class="mb-3">
+        <label for="group" class="form-label text-dark medium">Note Group:</label>
+        <div class="d-flex flex-column">
+          <div th:if="${#fields.hasErrors('group')}" class="alert alert-danger">
+            <p th:errors="*{group}"></p>
+          </div>
+          <select class="form-select rounded-5" id="group" name="group" th:field="*{group}" required>
+            <option th:value="null" selected >Choose...</option>
+            <option th:each="group : ${T(be.kdg.programming3.individualproject.domain.NoteGroup).values()}"
+                    th:value="${group}" th:text="${group}"></option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label text-dark medium">Description:</label>
+        <div class="d-flex flex-column">
+          <div th:if="${#fields.hasErrors('description')}" class="alert alert-danger">
+            <p th:errors="*{description}"></p>
+          </div>
+          <input class="form-control rounded-5" id="description" name="description" placeholder="Description" required
+                 th:field="*{description}" type="text">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="photo" class="form-label text-dark medium">Upload Photo:</label>
+        <div class="d-flex flex-column">
+          <div th:if="${#fields.hasErrors('photo')}" class="alert alert-danger">
+            <p th:errors="*{photo}"></p>
+          </div>
+          <input type="file" class="form-control rounded-5" id="photo" name="photo" accept="image/*">
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center mt-5">
+        <button th:utext="#{addNote.add}" type="submit" class="btn text-light rounded-pill" style="background-color: #7743db; padding: 10px 20px; font-size: 18px;">Add Note</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div th:insert="~{fragments/footer::footer}"></div>
+</body>

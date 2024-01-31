@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfume Details</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <script defer src="../../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
+</head>
+<body class="body w-auto" th:object="${perfume}">
+
+<!--Nav bar-->
+<div th:insert="~{fragments/navbar::nav}" class="fixed-top"></div>
+
+<div class="container m-5 mx-auto">
+    <div class="row">
+        <!-- Left column for perfume image -->
+        <div class="col-md-6">
+            <div class="container d-sm-flex justify-content-sm-center">
+                <img class="details-perfume-img img-fluid" th:src="@{'/img/perfumes-img/' + *{getName().toLowerCase()} + '.jpg'}" alt="perfume-photo">
+            </div>
+        </div>
+
+        <!-- Right column for brand photo and details table -->
+        <div class="col-md-6 my-5 d-flex flex-column align-items-center justify-content-around">
+                <img class="img-fluid details-brand-img" th:src="@{'/img/brands/' + *{getBrand().getName().toLowerCase()} + '.png'}" alt="perfume-brand">
+            <table class="table">
+                <tbody class="h3">
+                <tr>
+                    <td>Name: </td>
+                    <td th:text="*{getName()}">name</td>
+                </tr>
+                <tr>
+                    <td>Concentration: </td>
+                    <td th:text="*{getType()}">concentration</td>
+                </tr>
+                <tr>
+                    <td>Release Date: </td>
+                    <td th:text="*{getReleaseDate()}">release date</td>
+                </tr>
+                <tr>
+                    <td>Price: </td>
+                    <td th:text="${perfume.getPrice()} + '&euro;'">price</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container px-0 mt-4">
+    <h3 class="text-center">Perfume Notes</h3>
+    <div class="row row-cols-2 notes-container rounded-4 m-auto row-cols-md-6 row-cols-lg-8">
+
+        <div class="col my-4" th:each="note : ${perfume.getNotes()}">
+            <div th:attr="note-id=${note.id}" class="text-center d-flex flex-column align-items-center details-btn-js justify-content-around">
+                <img th:src="@{'/img/notes/' + ${note.getName().toLowerCase()} + '.jpg'}" alt="note" class="img-fluid square-img rounded-4">
+                <p th:text="${note.getName()}" class="mt-2 h5">Name</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--Footer-->
+<div th:insert="~{fragments/footer::footer}"></div>
+</body>

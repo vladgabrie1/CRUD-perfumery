@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en_EN" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfumes</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+    <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <script defer src="../../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
+    <script defer src="../../static/js/price_slider.js" th:src="@{/js/price_slider.js}"></script>
+</head>
+<body class="body w-auto">
+<!-- Navbar -->
+<div th:insert="~{fragments/navbar::nav}" class="fixed-top"></div>
+
+<!-- Header -->
+<header id="headerPerfumes" class="header container">
+    <div class="container">
+        <div class="row">
+            <div id="container-text" class="col-md-12 text-center">
+                <h1 id="brand-name" class="display-1">monais</h1>
+                <h2 id="subtitle" class="display-5">crud perfumery</h2>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Main ( products )-->
+<main class="w-auto m-5 container-fluid">
+    <!-- Filtering-->
+    <div th:insert="~{fragments/perfume-filter::filter}"></div>
+
+    <!-- Cards-->
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
+        <div class="col" th:each="perfume : ${perfumes}" id="perfumeContainer">
+            <div class="card h-80 m-3">
+                <img th:src="@{'/img/perfumes-img/' + ${perfume.getName().toLowerCase()} + '.jpg'}" class="card-img-top card-img-fixed" alt="...">
+
+                <div class="card-body">
+                    <div class="clearfix mb-3">
+                        <span th:text="${perfume.getName()}" class="float-start badge">Perfume Name</span>
+                        <span th:text="${perfume.getPrice()} + '&euro;'" class="float-end price-hp ">500&euro;</span>
+                    </div>
+                    <div class="row card-buttons-container">
+<!--                        Details Button-->
+                        <div id="details" th:attr="perfume-id=${perfume.id}" class="details-btn details-btn-js text-center col">
+                            <a class="btn">Details</a>
+                        </div>
+
+                        <div class="delete-btn text-center col">
+                            <form th:id="'deleteForm-' + ${perfume.id}" th:action="@{/perfume/delete}" method="post">
+                                <input type="hidden" th:name="entityId" th:value="${perfume.id}"/>
+                                <button type="button" th:attr="data-entity-id=${perfume.id}" class="btn delete-button">Delete</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer -->
+<div th:insert="~{fragments/footer::footer}"></div>
+</body>
+</html>

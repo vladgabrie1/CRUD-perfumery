@@ -1,0 +1,13 @@
+[
+  {
+    "id": 4,
+    "name": "Versace Bright Crystal",
+    "brand": {
+      "id": 4,
+      "name": "Versace"
+    },
+    "releaseDate": "2006-12-20",
+    "type": "EAU_DE_TOILETTE",
+    "price": 80.0
+  }
+]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark" id="headerNav">
+    <div class="container-fluid">
+        <a class="navbar-brand d-block d-lg-none">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto ">
+                <li class="nav-item">
+                    <a th:utext="#{navbar.perfumes}" class=" h5 text-dark text-dark mx-3 link-hover" href="../../templates/perfume/list.html" th:href="@{/perfume/list}">Perfumes</a>
+                </li>
+                <li class="nav-item">
+                    <a th:utext="#{navbar.addPerfume}" class=" h5 text-dark text-dark mx-3 " href="../../templates/perfume/add.html" th:href="@{/perfume/add}">Add Perfume</a>
+                </li>
+                <li class="nav-item">
+                    <a th:utext="#{navbar.notes}" class=" h5 text-dark text-dark mx-3" href="../../templates/note/list.html" th:href="@{/note/list}">Notes</a>
+                </li>
+                <li class="nav-item">
+                    <a th:utext="#{navbar.addNote}" class=" h5 text-dark mx-3" href="../../templates/note/add.html" th:href="@{/note/add}">Add Note</a>
+                </li>
+                <li class="nav-item">
+                    <a th:utext="#{navbar.history}" class=" h5 text-dark text-dark mx-3" href="../../templates/history/history.html" th:href="@{/history}">History</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

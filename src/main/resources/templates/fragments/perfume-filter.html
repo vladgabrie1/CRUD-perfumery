@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App Bootstrap</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<form class="mb-5" th:fragment="filter" th:action="@{/perfume/list}" method="get">
+    <div class="filter-container justify-content-lg-start justify-content-sm-center">
+        <div>
+            <div class="input-group">
+                <button class="btn rounded-5 dropdown-toggle" type="button" id="drop-release-date" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Released after
+                </button>
+                <div class="dropdown-menu p-3 rounded-5" aria-labelledby="drop-release-date" >
+                    <label for="filterReleaseDate" class="form-label">Release Date after:</label>
+                    <input type="date" id="filterReleaseDate" name="filterReleaseDate" class="form-control"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-2">
+            <div class="input-group">
+                <button class="btn rounded-5 dropdown-toggle" type="button" id="drop-price" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Price
+                </button>
+                <div class="dropdown-menu dropdown-price p-3 color-1 rounded-5" aria-labelledby="drop-price">
+                    <label for="priceRange" class="form-label">Price Range:</label>
+                    <input type="text" id="priceRange" name="priceRange" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" id="submit-filter" class="btn text-white rounded-5">Apply Filters</button>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

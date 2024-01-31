@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App Bootstrap</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<form th:action="@{/note/list}" th:fragment="filter" method="get">
+    <div class="filter-container p-2 mx-sm-auto filter-container justify-content-lg-start justify-content-sm-center">
+
+        <div class="row">
+            <div class="col-md-4 mb-2 rounded-5">
+                <input placeholder="Enter Name" type="text" id="filterNoteName" name="filterName" class="form-control rounded-5"/>
+            </div>
+
+            <div class="col-md-4 mb-2 rounded-5">
+                <select id="filterNoteGroup" name="filterGroup" class="form-select rounded-5">
+                    <option value="">Select Group</option>
+                    <option th:each="group : ${T(be.kdg.programming3.individualproject.domain.NoteGroup).values()}"
+                            th:value="${group}" th:text="${group}"></option>
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <button type="submit" id="submit-filter" class="btn rounded-5 w-100">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+</body>
